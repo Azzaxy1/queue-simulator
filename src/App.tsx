@@ -1,8 +1,12 @@
-export default function App() {
+import QueueSimulator from "./QueueSimulator";
+
+const App: React.FC = () => {
   return (
-    <h1 className="text-3xl font-bold uppercase text-green-600 underline">
-      Hello world!
-    </h1>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <QueueSimulator />
+    </div>
   );
-}
+};
+
+export default App;
 
