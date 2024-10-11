@@ -11,8 +11,19 @@ const QueueSimulator: React.FC = () => {
   const [queue, setQueue] = useState<Customer[]>([]);
   const [counter, setCounter] = useState(0);
 
-  const addCustomer = () => {
-    const customerName = prompt("Tuliskan Nama Anda : ");
+  const addCustomer = async () => {
+    const { value: customerName } = await Swal.fire({
+      title: "Masukan Nama Pelanggan",
+      input: "text",
+      text: "Nama anda",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "Nama tidak boleh kosong";
+        }
+      },
+    });
+
     const newQueue = {
       id: counter + 1,
       name: `${customerName}`,
@@ -21,6 +32,13 @@ const QueueSimulator: React.FC = () => {
     setQueue(updatedQueue);
     localStorage.setItem("customer", JSON.stringify(updatedQueue));
     setCounter(counter + 1);
+
+    if (customerName) {
+      Swal.fire({
+        title: "Nama berhasil ditambahkan",
+        icon: "success",
+      });
+    }
   };
 
   const serveCustomer = () => {
