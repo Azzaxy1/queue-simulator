@@ -11,9 +11,15 @@ const QueueSimulator: React.FC = () => {
   const [counter, setCounter] = useState(0);
 
   const addCustomer = () => {
-    setQueue([...queue, { id: counter + 1, name: `Pelanggan ${counter + 1}` }]);
+    const customerName = prompt("Tuliskan Nama Anda : ");
+    const newQueue = {
+      id: counter + 1,
+      name: `Pelanggan ${customerName}`,
+    };
+    const updatedQueue = [...queue, newQueue];
+    setQueue(updatedQueue);
+    localStorage.setItem("customer", JSON.stringify(updatedQueue));
     setCounter(counter + 1);
-    localStorage.setItem("customer", JSON.stringify(queue));
   };
 
   const serveCustomer = () => {
@@ -28,28 +34,28 @@ const QueueSimulator: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white rounded-xl shadow-lg space-y-4">
+    <div className="max-w-lg p-6 mx-auto space-y-4 bg-white shadow-lg rounded-xl">
       <h1 className="text-2xl font-bold">Simulasi Antrian</h1>
       <div className="space-y-2">
         <button
           onClick={addCustomer}
-          className="bg-blue-500 mr-4 text-white px-4 py-2 rounded"
+          className="px-4 py-2 mr-4 text-white bg-blue-500 rounded"
         >
           Tambahkan Pelanggan
         </button>
         <button
           onClick={serveCustomer}
-          className="bg-green-500 text-white px-4 py-2 rounded"
+          className="px-4 py-2 text-white bg-green-500 rounded"
         >
           Melayani Pelanggan
         </button>
       </div>
-      <ul className="space-y-1 mt-4">
+      <ul className="mt-4 space-y-1">
         {queue.length > 0 ? (
           queue.map((customer, index) => (
             <li
               key={index}
-              className="bg-gray-100 flex gap-3 items-center p-2 rounded"
+              className="flex items-center gap-3 p-2 bg-gray-100 rounded"
             >
               <img src={Customer} width={30} className="" />
               {customer.name}
