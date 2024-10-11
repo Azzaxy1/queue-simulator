@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Customer from "./assets/user.png";
+import Swal from "sweetalert2";
 
 interface Customer {
   id: number;
@@ -14,7 +15,7 @@ const QueueSimulator: React.FC = () => {
     const customerName = prompt("Tuliskan Nama Anda : ");
     const newQueue = {
       id: counter + 1,
-      name: `Pelanggan ${customerName}`,
+      name: `${customerName}`,
     };
     const updatedQueue = [...queue, newQueue];
     setQueue(updatedQueue);
@@ -24,6 +25,12 @@ const QueueSimulator: React.FC = () => {
 
   const serveCustomer = () => {
     setQueue(queue.slice(1));
+    Swal.fire({
+      title: "Berhasil keluar!",
+      text: "Terimakasih sudah mempercayakan layanan kami.",
+      icon: "success",
+      confirmButtonText: "Oke",
+    });
   };
 
   useEffect(() => {
@@ -57,8 +64,8 @@ const QueueSimulator: React.FC = () => {
               key={index}
               className="flex items-center gap-3 p-2 bg-gray-100 rounded"
             >
-              <img src={Customer} width={30} className="" />
-              {customer.name}
+              <img src={Customer} width={30} />
+              Nama Pelanggan :<span className="font-bold">{customer.name}</span>
             </li>
           ))
         ) : (
