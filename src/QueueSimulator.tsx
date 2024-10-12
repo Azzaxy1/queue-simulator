@@ -3,12 +3,18 @@ import Customer from "./assets/user.png";
 import Swal from "sweetalert2";
 import QueueImg from "./assets/queue.png";
 
+type QueueProps = {
+  title: string;
+  addBtn: string;
+  serveBtn: string;
+};
+
 interface Customer {
   id: number;
   name: string;
 }
 
-const QueueSimulator: React.FC = () => {
+const QueueSimulator: React.FC<QueueProps> = ({ title, addBtn, serveBtn }) => {
   const [queue, setQueue] = useState<Customer[]>([]);
   const [counter, setCounter] = useState(0);
 
@@ -63,20 +69,20 @@ const QueueSimulator: React.FC = () => {
     <div className="max-w-lg p-6 mx-auto space-y-4 bg-white shadow-lg rounded-xl">
       <div className="flex flex-col items-center">
         <img width={50} src={QueueImg} />
-        <h1 className="text-3xl font-bold">Simulasi Antrian</h1>
+        <h1 className="text-3xl font-bold">{title}</h1>
       </div>
       <div className="space-y-2">
         <button
           onClick={addCustomer}
           className="px-4 py-2 mr-4 text-white bg-blue-500 rounded"
         >
-          Tambahkan Pelanggan
+          {addBtn}
         </button>
         <button
           onClick={serveCustomer}
           className="px-4 py-2 text-white bg-green-500 rounded"
         >
-          Melayani Pelanggan
+          {serveBtn}
         </button>
       </div>
       <ul className="mt-4 space-y-1">
