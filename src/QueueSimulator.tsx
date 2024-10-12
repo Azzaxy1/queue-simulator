@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Customer from "./assets/user.png";
 import Swal from "sweetalert2";
+import QueueImg from "./assets/queue.png";
 
 interface Customer {
   id: number;
@@ -60,7 +61,10 @@ const QueueSimulator: React.FC = () => {
 
   return (
     <div className="max-w-lg p-6 mx-auto space-y-4 bg-white shadow-lg rounded-xl">
-      <h1 className="text-2xl font-bold">Simulasi Antrian</h1>
+      <div className="flex flex-col items-center">
+        <img width={50} src={QueueImg} />
+        <h1 className="text-3xl font-bold">Simulasi Antrian</h1>
+      </div>
       <div className="space-y-2">
         <button
           onClick={addCustomer}
