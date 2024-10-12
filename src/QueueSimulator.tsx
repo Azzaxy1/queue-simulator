@@ -35,7 +35,7 @@ const QueueSimulator: React.FC = () => {
 
     if (customerName) {
       Swal.fire({
-        title: "Nama berhasil ditambahkan",
+        title: "Pelanggan berhasil masuk kedalam antrian",
         icon: "success",
       });
     }
